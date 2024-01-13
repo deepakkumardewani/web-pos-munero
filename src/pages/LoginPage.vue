@@ -1,3 +1,49 @@
+<script setup lang="ts">
+import { useFetch } from "@vueuse/core";
+import { useRouter } from "vue-router";
+import { useToken } from "@/composables/token";
+import { ref } from "vue";
+
+const router = useRouter();
+const { setToken } = useToken();
+const rules = {
+  required: (value: string) => !!value || "Required.",
+};
+
+const username = ref("");
+const password = ref("");
+const loading = ref(false);
+const baseUrl = import.meta.env.VITE_GIFTLOV_BASE_URL;
+const generateTokenURL = `${baseUrl}/generateToken`;
+
+async function signIn() {
+  loading.value = true;
+  const body = {
+    username: username.value,
+    password: password.value,
+  };
+
+  const { data, isFinished, error, isFetching } = await useFetch(
+    generateTokenURL,
+    {
+      headers: { "X-GIFTLOV-DATE": "" },
+    },
+  ).post(body);
+
+  if (isFinished.value && !error.value) {
+    loading.value = isFetching.value;
+
+    const tokenData = JSON.parse(data.value);
+    const { token, expireDate } = tokenData;
+    setToken({
+      token,
+      expireDate,
+    });
+
+    router.push("/");
+  }
+}
+</script>
 <template>
   <div class="tw-flex tw-justify-center tw-items-center">
     <v-card
