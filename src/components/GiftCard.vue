@@ -1,3 +1,33 @@
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+import { useOrderStore } from "@/stores/order";
+
+// create map for popular currencies
+const currencyMap = {
+  AED: "AED",
+  USD: "$",
+  EUR: "€",
+  GBP: "£",
+};
+
+const props = defineProps({
+  card: {
+    type: Object,
+    required: true,
+  },
+});
+const orderStore = useOrderStore();
+const router = useRouter();
+const currency: string = currencyMap[props.card.currency]
+  ? currencyMap[props.card.currency]
+  : "AED";
+
+function order(card: any) {
+  orderStore.order = card;
+  router.push("/ordering");
+}
+</script>
+
 <template>
   <v-card
     class="my-3 bg-elementBg md:tw-w-[300px] tw-w-[400px]"
@@ -25,3 +55,5 @@
     </v-card-text>
   </v-card>
 </template>
+
+<style scoped></style>
