@@ -20,7 +20,7 @@ const pagesLinks = ref([
 </script>
 <template>
   <template v-for="page in pagesLinks" :key="page.id">
-    <v-btn variant="text" :to="page.path">
+    <v-btn variant="text" :to="{ name: page.id }">
       {{ page.name }}
     </v-btn>
   </template>
