@@ -1,39 +1,36 @@
 <script setup lang="ts">
-import { useFetch } from "@vueuse/core";
 import { useRouter } from "vue-router";
 import { useToken } from "@/composables/token";
+import { useApi } from "@/composables/api";
 import { ref } from "vue";
 
 const router = useRouter();
 const { setToken } = useToken();
+const { getAuthToken } = useApi();
 const rules = {
   required: (value: string) => !!value || "Required.",
 };
 
-const username = ref("");
-const password = ref("");
+const username = ref("coding_challenge_1");
+const password = ref("coding_challenge_1");
 const loading = ref(false);
 const baseUrl = import.meta.env.VITE_GIFTLOV_BASE_URL;
 const generateTokenURL = `${baseUrl}/generateToken`;
 
 async function signIn() {
   loading.value = true;
+
   const body = {
     username: username.value,
     password: password.value,
   };
 
-  const { data, isFinished, error, isFetching } = await useFetch(
-    generateTokenURL,
-    {
-      headers: { "X-GIFTLOV-DATE": "" },
-    },
-  ).post(body);
+  const { data, isFinished, error, isFetching } = await getAuthToken(body);
 
   if (isFinished.value && !error.value) {
     loading.value = isFetching.value;
 
-    const tokenData = JSON.parse(data.value);
+    const tokenData = data.value;
     const { token, expireDate } = tokenData;
     setToken({
       token,
