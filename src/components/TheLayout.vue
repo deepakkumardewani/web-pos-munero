@@ -1,19 +1,13 @@
 <template>
   <v-app>
-    <TheTopNav></TheTopNav>
+    <TheTopNav />
     <v-main>
       <div>
-        <v-container>
-
-        </v-container>
         <slot />
       </div>
     </v-main>
-    <TheFooter></TheFooter>
+    <TheFooter />
   </v-app>
 </template>
 
-<script setup lang="ts">
-
-
-</script>
+<script setup lang="ts"></script>
