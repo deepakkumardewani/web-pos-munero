@@ -13,14 +13,14 @@ const pagesLinks = ref([
   },
   {
     id: "ordering",
-    name: "Ordering",
+    name: "New Order",
     path: "/ordering",
   },
 ]);
 </script>
 <template>
   <template v-for="page in pagesLinks" :key="page.id">
-    <v-btn variant="text" :to="{ name: page.id }">
+    <v-btn class="md:tw-mx-4" variant="text" :to="{ name: page.id }">
       {{ page.name }}
     </v-btn>
   </template>
