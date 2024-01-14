@@ -1,3 +1,24 @@
+<script setup lang="ts">
+import { useApi } from "@/composables/api";
+import { onMounted, ref } from "vue";
+
+const { get } = useApi();
+const orders = ref<any[]>([]);
+const loading = ref<boolean>(true);
+
+onMounted(async () => {
+  const url = "orders";
+  const params = {
+    current: 1,
+    rowCount: 100,
+  };
+  const { data, isFinished, error, isFetching } = await get(url, params);
+  if (isFinished.value) {
+    loading.value = isFetching.value;
+    orders.value = data.value.orders;
+  }
+});
+</script>
 <template>
   <div>
     <Heading text="My Orders" />
