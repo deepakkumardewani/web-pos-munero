@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { useOrderStore } from "@/stores/order";
+import { useStore } from "@/stores";
 
 // create map for popular currencies
-const currencyMap = {
+const currencyMap: { [index: string]: any } = {
   AED: "AED",
   USD: "$",
   EUR: "€",
@@ -16,21 +16,21 @@ const props = defineProps({
     required: true,
   },
 });
-const orderStore = useOrderStore();
+const store = useStore();
 const router = useRouter();
 const currency: string = currencyMap[props.card.currency]
   ? currencyMap[props.card.currency]
   : "AED";
 
-function order(card: any) {
-  orderStore.order = card;
+function placeOrder(card: any) {
+  store.card = card;
   router.push("/ordering");
 }
 </script>
 
 <template>
   <v-card
-    class="my-3 bg-elementBg md:tw-w-[300px] tw-w-[400px]"
+    class="tw-my-3 md:tw-w-[300px] tw-w-[400px]"
     height="350"
     :ripple="false"
   >
@@ -50,10 +50,11 @@ function order(card: any) {
       </div>
 
       <div class="text-center tw-my-5">
-        <v-btn color="info" @click="order(card)">Buy</v-btn>
+        <v-btn color="info" @click="placeOrder(card)">Buy</v-btn>
       </div>
     </v-card-text>
   </v-card>
 </template>
 
 <style scoped></style>
+@/stores
