@@ -60,7 +60,9 @@ export function useApi() {
       } else if (typeof obj[property] === "object") {
         createValuesArray(obj[property]);
       } else {
-        valuesArray.push(obj[property]);
+        if (obj[property] !== "") {
+          valuesArray.push(obj[property]);
+        }
       }
     }
     return valuesArray;
