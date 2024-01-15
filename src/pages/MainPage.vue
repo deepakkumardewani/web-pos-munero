@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useApi } from "@/composables/api";
 import { onMounted, ref } from "vue";
+import { useToast } from "vue-toastification";
 
 interface Wallet {
   id: string;
@@ -9,17 +10,22 @@ interface Wallet {
   currency: string;
   default: boolean;
 }
-
+const { get } = useApi();
+const toast = useToast();
 const wallets = ref<Wallet[]>([]);
 const walletId = ref<string>("");
+const loading = ref<boolean>(true);
 
 onMounted(async () => {
-  const { get } = useApi();
   const url = "wallets/balances";
-
   const { data, isFinished, error, isFetching } = await get(url);
 
   if (isFinished.value) {
+    loading.value = isFetching.value;
+    if (error.value) {
+      toast.error("Error fetching wallets");
+    }
+    if (data.value) {
     wallets.value = data.value;
     walletId.value = wallets.value[0].id;
   }
