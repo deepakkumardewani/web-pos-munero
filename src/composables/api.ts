@@ -8,7 +8,7 @@ export function useApi() {
   const baseUrl = import.meta.env.VITE_GIFTLOV_BASE_URL;
   const now = moment().format("DDMMyyyyHHmmss");
   let valuesArray: any = [];
-  async function get(url: string, params?: object) {
+  async function get(url: string, params?: any) {
     let finalUrl = `${baseUrl}${url}`;
     if (params) {
       let paramString = "?";
@@ -53,7 +53,7 @@ export function useApi() {
       .json();
   }
 
-  function createValuesArray(obj: object) {
+  function createValuesArray(obj: any) {
     for (const property in obj) {
       if (typeof obj[property] === "array") {
         createValuesArray(obj[property][0]);
