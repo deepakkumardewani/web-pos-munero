@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useToken } from "@/composables/token";
 import { useApi } from "@/composables/api";
-import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
 const router = useRouter();
+const toast = useToast();
+
 const { setToken } = useToken();
 const { getAuthToken } = useApi();
 const rules = {
@@ -27,22 +30,26 @@ async function signIn() {
 
   const { data, isFinished, error, isFetching } = await getAuthToken(body);
 
-  if (isFinished.value && !error.value) {
+  if (isFinished.value) {
     loading.value = isFetching.value;
+    if (error.value) {
+      toast.error("Invalid username or password");
+    }
+    if (data.value) {
+      const tokenData = data.value;
+      const { token, expireDate } = tokenData;
+      setToken({
+        token,
+        expireDate,
+      });
 
-    const tokenData = data.value;
-    const { token, expireDate } = tokenData;
-    setToken({
-      token,
-      expireDate,
-    });
-
-    router.push("/");
+      router.push("/");
+    }
   }
 }
 </script>
 <template>
-  <div class="tw-flex tw-justify-center tw-items-center">
+  <div class="tw-flex tw-justify-center tw-items-center tw-h-[95vh]">
     <v-card
       variant="elevated"
       rounded="xl"

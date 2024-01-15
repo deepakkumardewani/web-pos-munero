@@ -2,9 +2,11 @@
 import { useApi } from "@/composables/api";
 import { onMounted, ref } from "vue";
 import { useLocal } from "@/composables/local";
+import { useToast } from "vue-toastification";
 
 const { setLocal, getLocal } = useLocal();
 const { get } = useApi();
+const toast = useToast();
 
 const giftCards = ref<any[]>([]);
 const loading = ref<boolean>(true);
@@ -12,12 +14,9 @@ const loading = ref<boolean>(true);
 onMounted(async () => {
   const localCards = await getLocal("giftCards");
   if (localCards && Object.keys(localCards).length !== 0) {
-    console.log("Fetching from local storage");
     loading.value = false;
     giftCards.value = localCards;
   } else {
-    console.log("Fetching from API");
-
     const url = "items";
     const params = {
       current: 1,
@@ -27,9 +26,16 @@ onMounted(async () => {
     };
     const { data, isFinished, error, isFetching } = await get(url, params);
     if (isFinished.value) {
-      loading.value = isFetching.value;
-      giftCards.value = data.value.items;
-      setLocal("giftCards", giftCards.value);
+      if (error.value) {
+        toast.error(
+          "An error occured fetching the catalogue. Please try again.",
+        );
+      }
+      if (data.value) {
+        loading.value = isFetching.value;
+        giftCards.value = data.value.items;
+        setLocal("giftCards", giftCards.value);
+      }
     }
   }
 });
