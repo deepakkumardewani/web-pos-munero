@@ -15,6 +15,8 @@ const store = useStore();
 const rules = {
   required: (value: string) => !!value || "Required.",
 };
+
+const loading = ref<boolean>(false);
 const isQRVisible = ref<boolean>(false);
 const claimURL = ref<string>("");
 const firstName = ref<string>("");
@@ -49,6 +51,7 @@ function generateUniqueID() {
 }
 
 async function placeOrder() {
+  loading.value = true;
   const url = "placeOrder";
   const uniqueId = generateUniqueID();
   const body = {
@@ -70,7 +73,8 @@ async function placeOrder() {
   };
 
   const { data, isFinished, error, isFetching } = await post(url, body);
-  if (isFinished.value && !error.value) {
+  if (isFinished.value) {
+    loading.value = isFetching.value;
     if (error.value) {
       toast.error("An error occured placing your order. Please try again.");
     }
@@ -276,6 +280,7 @@ function reset() {
                 <v-btn
                   :disabled="!firstName || !lastName || !cardItemId || !amount"
                   color="info"
+                  :loading="loading"
                   @click="placeOrder()"
                   >Place Order</v-btn
                 >
