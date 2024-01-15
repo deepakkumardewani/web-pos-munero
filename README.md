@@ -4,6 +4,11 @@
 This web application is designed to interact with the MUNERO Global Loyalty APIs, providing a user-friendly and responsive interface for authentication, browsing the digital gift card catalogue, placing orders, and managing orders.
 
 ## Features
+1. Responsive
+2. Dark mode
+3. Authentication
+
+#Pages
 
 ### Login Page
 
@@ -13,6 +18,10 @@ This web application is designed to interact with the MUNERO Global Loyalty APIs
 
 - Display a navigation menu for easy access to the catalogue, ordering page, and order details.
 - Show user wallet balance(s) and support displaying multiple wallet balances.
+
+### Transactions Page
+
+- Allows the user to see all the transactions related to the wallet
 
 ### Catalogue Page
 
