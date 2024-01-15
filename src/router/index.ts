@@ -5,6 +5,7 @@ import MainPage from "@/pages/MainPage.vue";
 import OrderDetailsPage from "@/pages/OrderDetailsPage.vue";
 import OrderingPage from "@/pages/OrderingPage.vue";
 import OrdersPage from "@/pages/OrdersPage.vue";
+import TransactionsPage from "@/pages/TransactionsPage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -43,6 +44,12 @@ const router = createRouter({
       path: "/order-detail",
       name: "detail",
       component: OrderDetailsPage,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/transactions",
+      name: "transactions",
+      component: TransactionsPage,
       meta: { requiresAuth: true },
     },
   ],
