@@ -5,21 +5,20 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module 'vue' {
+declare module "vue" {
   export interface GlobalComponents {
-    Catalogue: typeof import('./src/components/Catalogue.vue')['default']
-    GiftCard: typeof import('./src/components/GiftCard.vue')['default']
-    Heading: typeof import('./src/components/Heading.vue')['default']
-    Order: typeof import('./src/components/Order.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
-    SideBar: typeof import('./src/components/SideNav/SideBar.vue')['default']
-    TheFooter: typeof import('./src/components/TheFooter.vue')['default']
-    TheLayout: typeof import('./src/components/TheLayout.vue')['default']
-    ThemeButton: typeof import('./src/components/ThemeButton.vue')['default']
-    TheTopNav: typeof import('./src/components/TheTopNav/TheTopNav.vue')['default']
-    TopNavMenu: typeof import('./src/components/TheTopNav/TopNavMenu.vue')['default']
-    Wallet: typeof import('./src/components/Wallet.vue')['default']
-    WalletDetails: typeof import('./src/components/WalletDetails.vue')['default']
+    GiftCard: (typeof import("./src/components/GiftCard.vue"))["default"];
+    Heading: (typeof import("./src/components/Heading.vue"))["default"];
+    Order: (typeof import("./src/components/Order.vue"))["default"];
+    RouterLink: (typeof import("vue-router"))["RouterLink"];
+    RouterView: (typeof import("vue-router"))["RouterView"];
+    SideBar: (typeof import("./src/components/SideNav/SideBar.vue"))["default"];
+    TheFooter: (typeof import("./src/components/TheFooter.vue"))["default"];
+    TheLayout: (typeof import("./src/components/TheLayout.vue"))["default"];
+    ThemeButton: (typeof import("./src/components/ThemeButton.vue"))["default"];
+    TheTopNav: (typeof import("./src/components/TheTopNav/TheTopNav.vue"))["default"];
+    TopNavMenu: (typeof import("./src/components/TheTopNav/TopNavMenu.vue"))["default"];
+    Transaction: (typeof import("./src/components/Transaction.vue"))["default"];
+    Wallet: (typeof import("./src/components/Wallet.vue"))["default"];
   }
 }
