@@ -24,10 +24,11 @@ const currency: string = currencyMap[props.order.lineItems[0].currency]
   ? currencyMap[props.order.lineItems[0].currency]
   : "AED";
 
-const orderPlaced = moment(props.order.creationDate).format("DD/MM/YYYY");
+const orderPlaced = moment(props.order.creationDate).format("D MMMM YYYY");
 const total = props.order.lineItems[0].value;
 const orderId = props.order.id;
 const customerName = props.order.customerName;
+const status = props.order.lineItems[0].status;
 const refNo = props.order.referenceNo;
 onMounted(() => {});
 
@@ -40,23 +41,21 @@ function viewOrderDetails(order: any) {
 <template>
   <v-card
     class="tw-my-3 tw-mx-2 md:tw-w-[45%] tw-w-[100%]"
-    height="180"
+    height="250"
     :ripple="false"
   >
-    <v-card-title class="tw-bg-gray-200">
+    <v-card-title class="bg-cardTitle">
       <v-row>
         <v-col cols="6" class="tw-flex tw-justify-start">
           <div>
-            <div class="tw-text-gray-500 tw-text-sm">ORDER PLACED</div>
-            <div class="tw-text-gray-500 tw-text-lg">{{ orderPlaced }}</div>
+            <div class="tw-text-sm">ORDER PLACED</div>
+            <div class="tw-text-lg">{{ orderPlaced }}</div>
           </div>
         </v-col>
 
         <v-col cols="6" class="tw-flex tw-justify-end">
           <div>
-            <div
-              class="tw-flex tw-justify-end tw-pr-[17px] tw-text-gray-500 tw-text-sm"
-            >
+            <div class="tw-flex tw-justify-end tw-pr-[17px] tw-text-sm">
               ORDER # {{ orderId }}
             </div>
             <v-btn variant="text" @click="viewOrderDetails(order)"
@@ -68,24 +67,38 @@ function viewOrderDetails(order: any) {
     </v-card-title>
     <v-card-text class="pa-5">
       <v-row>
-        <v-col cols="4" class="tw-flex tw-justify-start tw-items-center">
+        <v-col
+          cols="9"
+          sm="10"
+          class="tw-flex tw-justify-start tw-items-center"
+        >
           <div>
             <div class="tw-text-gray-500 tw-text-sm">FOR</div>
-            <div class="tw-text-black tw-text-xl">{{ customerName }}</div>
+            <div class="tw-text-xl">{{ customerName }}</div>
           </div>
         </v-col>
-        <v-col cols="4" class="tw-flex tw-justify-center">
-          <div>
-            <div class="tw-text-gray-500 tw-text-sm">REF #</div>
-            <div class="tw-text-black tw-text-xl">{{ refNo }}</div>
-          </div>
-        </v-col>
-        <v-col cols="4" class="tw-flex tw-justify-end">
+        <v-col cols="3" sm="2" class="tw-flex tw-justify-start tw-items-end">
           <div>
             <div class="tw-text-gray-500 tw-text-sm">TOTAL</div>
-            <div class="tw-text-black tw-text-xl">
-              {{ currency }}{{ total }}
-            </div>
+            <div class="tw-text-xl">{{ currency }}{{ total }}</div>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          cols="9"
+          sm="10"
+          class="tw-flex tw-justify-start tw-items-center"
+        >
+          <div>
+            <div class="tw-text-gray-500 tw-text-sm">REF #</div>
+            <div class="tw-text-xl">{{ refNo }}</div>
+          </div>
+        </v-col>
+        <v-col cols="3" sm="2" class="tw-flex tw-justify-start tw-items-end">
+          <div>
+            <div class="tw-text-gray-500 tw-text-sm">STATUS</div>
+            <div class="tw-text-xl">{{ status }}</div>
           </div>
         </v-col>
       </v-row>
