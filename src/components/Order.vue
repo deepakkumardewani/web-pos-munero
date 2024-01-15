@@ -58,7 +58,7 @@ function viewOrderDetails(order: any) {
             <div class="tw-flex tw-justify-end tw-pr-[17px] tw-text-sm">
               ORDER # {{ orderId }}
             </div>
-            <v-btn variant="text" @click="viewOrderDetails(order)"
+            <v-btn variant="tonal" @click="viewOrderDetails(order)"
               >View Order Details</v-btn
             >
           </div>
