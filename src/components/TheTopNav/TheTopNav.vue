@@ -25,6 +25,9 @@ function goToDashboard() {
       <TopNavMenu />
     </div>
     <div class="tw-flex tw-flex-1 tw-justify-end tw-pr-2">
+      <div>
+        <ThemeButton />
+      </div>
       <v-avatar color="grey">
         <font-awesome-icon icon="fa-solid fa-user" />
       </v-avatar>
