@@ -1,7 +1,9 @@
+<script setup lang="ts"></script>
 <template>
   <v-app>
+    <SideBar />
     <TheTopNav />
-    <v-main>
+    <v-main class="pa-0">
       <div>
         <slot />
       </div>
@@ -9,5 +11,3 @@
     <TheFooter />
   </v-app>
 </template>
-
-<script setup lang="ts"></script>
