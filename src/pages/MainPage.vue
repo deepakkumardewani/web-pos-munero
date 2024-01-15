@@ -26,8 +26,9 @@ onMounted(async () => {
       toast.error("Error fetching wallets");
     }
     if (data.value) {
-    wallets.value = data.value;
-    walletId.value = wallets.value[0].id;
+      wallets.value = data.value;
+      walletId.value = wallets.value[0].id;
+    }
   }
 });
 
@@ -37,18 +38,10 @@ function seeWalletDetails(wallet: Wallet) {
 </script>
 <template>
   <div class="tw-mx-10 tw-mt-24">
+    <Heading text="My Wallets" class="tw-my-5" />
+
     <v-row align="center" justify="center">
-      <v-col
-        cols="12"
-        sm="6"
-        lg="4"
-        class="tw-bg-gray-200 tw-font-bold tw-text-2xl"
-      >
-        My Wallets
-      </v-col>
-    </v-row>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="6" lg="4" class="tw-bg-gray-200">
+      <v-col cols="12" sm="6" lg="4" class="">
         <div v-if="loading">
           <v-skeleton-loader v-for="_ in 3" type="card"></v-skeleton-loader>
         </div>
@@ -56,9 +49,6 @@ function seeWalletDetails(wallet: Wallet) {
           <Wallet :wallet="wallet" />
         </div>
       </v-col>
-      <!-- <v-col cols="8">
-        <WalletDetails :walletId="walletId" />
-      </v-col> -->
     </v-row>
   </div>
 </template>
