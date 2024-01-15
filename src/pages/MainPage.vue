@@ -30,8 +30,8 @@ function seeWalletDetails(wallet: Wallet) {
 }
 </script>
 <template>
-  <div class="tw-mx-10 tw-mt-5">
-    <v-row v-if="wallets.length > 0" align="center" justify="center">
+  <div class="tw-mx-10 tw-mt-24">
+    <v-row align="center" justify="center">
       <v-col
         cols="12"
         sm="6"
@@ -41,9 +41,12 @@ function seeWalletDetails(wallet: Wallet) {
         My Wallets
       </v-col>
     </v-row>
-    <v-row v-if="wallets.length > 0" align="center" justify="center">
+    <v-row align="center" justify="center">
       <v-col cols="12" sm="6" lg="4" class="tw-bg-gray-200">
-        <div v-for="wallet in wallets" :key="wallet.id">
+        <div v-if="loading">
+          <v-skeleton-loader v-for="_ in 3" type="card"></v-skeleton-loader>
+        </div>
+        <div v-else v-for="wallet in wallets" :key="wallet.id">
           <Wallet :wallet="wallet" />
         </div>
       </v-col>
