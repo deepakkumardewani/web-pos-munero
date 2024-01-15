@@ -27,7 +27,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="tw-mt-20">
+  <div class="tw-my-20">
     <Heading text="My Orders" />
     <div
       v-if="loading"

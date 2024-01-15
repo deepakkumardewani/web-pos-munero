@@ -110,7 +110,7 @@ function reset() {
 }
 </script>
 <template>
-  <div class="tw-mt-24 tw-mb-20">
+  <div class="tw-my-24">
     <Heading text="New Order" />
     <div class="tw-flex tw-justify-center tw-items-center">
       <v-card width="500" class="my-3">
@@ -273,7 +273,12 @@ function reset() {
                 >
               </div>
               <div class="tw-my-8 text-center">
-                <v-btn color="info" @click="placeOrder()">Place Order</v-btn>
+                <v-btn
+                  :disabled="!firstName || !lastName || !cardItemId || !amount"
+                  color="info"
+                  @click="placeOrder()"
+                  >Place Order</v-btn
+                >
               </div>
             </v-col>
           </v-row>
