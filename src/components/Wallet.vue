@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import router from "@/router";
 import { PropType, onMounted, ref } from "vue";
 
+import { useStore } from "@/stores";
+const store = useStore();
 interface Wallet {
   id: string;
   title: string;
@@ -9,12 +12,19 @@ interface Wallet {
   default: boolean;
 }
 
-defineProps({
+const props = defineProps({
   wallet: {
     type: Object as PropType<Wallet>,
     required: true,
   },
 });
+
+const isActive = ref<boolean>(false);
+
+function showTransactions() {
+  router.push("/transactions");
+  store.walletId = props.wallet.id;
+}
 
 onMounted(async () => {
   console.log("Wallet page mounted");
@@ -32,6 +42,11 @@ onMounted(async () => {
         </div>
       </div>
     </v-card-item>
+    <v-card-actions class="tw-flex tw-justify-center">
+      <v-btn @click="showTransactions()" variant="text" color="info">
+        See Wallet Transactions
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
